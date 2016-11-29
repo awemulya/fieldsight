@@ -5,12 +5,13 @@ import { Hero } from './hero';
 @Injectable()
 export class HeroService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private heroesUrl = 'app/heroes';  // URL to web api
+  private heroesUrl = 'http://192.168.1.17:8001/fieldsight/api/site/';  // URL to web api
   constructor(private http: Http) { }
+ 
   getHeroes(): Promise<Hero[]> {
     return this.http.get(this.heroesUrl)
                .toPromise()
-               .then(response => response.json().data as Hero[])
+               .then(response => response.json() as Hero[])
                .catch(this.handleError);
   }
   getHero(id: number): Promise<Hero> {
