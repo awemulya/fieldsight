@@ -1,1 +1,18 @@
-<ul><li *ngFor="let dino of dinos">{{dino.name}}</li></ul>
+<h2> Form Groups </h2>
+<div *ngIf="selectedGroup">
+  <h2>
+    {{selectedGroup.name | uppercase}} 
+  </h2>
+  
+</div>
+
+<ul class="heroes">
+  <li *ngFor="let group of groups" (click)="onSelect(group)"
+      [class.selected]="group === selectedGroup">
+    <span>{{group.name}}</span>
+ 
+      <button class="delete"
+      (click)="addStage(group.id); $event.stopPropagation()">Show Stages</button>
+  </li> 
+</ul>
+

@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent }   from './dashboard.component';
 import { HeroesComponent }      from './heroes.component';
 import { GroupsComponent }      from './components/groups/groups.component';
+import { AddStageComponent }      from './components/stage/add-stage.component';
 import { HeroDetailComponent }  from './hero-detail.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'heroes',     component: HeroesComponent }
-  { path: 'forms',     component: GroupsComponent }
+  { path: 'heroes',     component: HeroesComponent },
+  { path: 'forms',     component: GroupsComponent },
+  { path: 'stage/add/:id',     component: AddStageComponent }
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
