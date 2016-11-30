@@ -12,6 +12,7 @@ export class GroupsComponent implements OnInit {
   groups: any[];
   error: any;
   selectedGroup: Hero;
+  stagesOf: Hero;
   showAdd: boolean;
 
   constructor(private groupsService: GroupsService,
@@ -35,7 +36,5 @@ export class GroupsComponent implements OnInit {
     this.selectedGroup = group;
   }
  
-  addStage(groupId: number): void {
-    this.router.navigate(['/stage/add', groupId]);
-  }
+  
 }

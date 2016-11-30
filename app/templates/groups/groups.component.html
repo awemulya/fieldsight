@@ -2,17 +2,19 @@
 <div *ngIf="selectedGroup">
   <h2>
     {{selectedGroup.name | uppercase}} 
+    {{selectedGroup.description}} 
   </h2>
-  
+  stages List of {{selectedGroup.name}}
 </div>
+
 
 <ul class="heroes">
   <li *ngFor="let group of groups" (click)="onSelect(group)"
       [class.selected]="group === selectedGroup">
     <span>{{group.name}}</span>
  
-      <button class="delete"
-      (click)="addStage(group.id); $event.stopPropagation()">Show Stages</button>
+      <button class="heros"
+      (click)="onSelect(group); $event.stopPropagation()">Detail</button>
   </li> 
 </ul>
 
