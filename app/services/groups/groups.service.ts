@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class DinosaurService {
+export class GroupsService {
   private apiURL = 'http://192.168.1.17:8001/fieldsight/api/site';  // URL to web api
 
   constructor(private http: Http) { }
