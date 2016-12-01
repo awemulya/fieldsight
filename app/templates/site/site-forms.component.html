@@ -5,12 +5,12 @@
 <div class="heroes">
   <div *ngFor="let form of siteForms" (click)="onSelect(form)"
       [class.selected]="form === selectedForm">
-    <span>Name: {{form.name}}</span>
+    <span>Name: <b>{{form.name}}</b></span>
     <span>Description: {{form.descriptionText}}</span>
     <span>Staged: {{form.is_staged}}</span>
     <span>Scheduled:{{form.is_scheduled}}</span>
     <a href ="http://localhost:8001/forms/reports/{{form.id}}">View Submission Data</a>
-    <a href ="http://localhost:8000/">View Form</a>
+    <a href ="http://localhost:8000/">Preview Form</a>
   </div> 
 </div>
  <button (click)="goBack()">Back</button>
