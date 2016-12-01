@@ -5,8 +5,9 @@ import { Hero }                from '../../hero';
 
 @Injectable()
 export class GroupsService {
-  private apiURL = 'http://192.168.1.17:8001/forms/api/groups';  // URL to web api
-  private heroesUrl = 'http://192.168.1.17:8001/fieldsight/api/site';  // URL to web api
+  private apiURL = 'http://192.168.1.17:8001/forms/api/groups';  // URL to groups api
+  private apiSiteForms = 'http://192.168.1.17:8001/forms/api/site';  // URL to groups api
+  private heroesUrl = 'http://192.168.1.17:8001/fieldsight/api/site';  // URL to sites
   constructor(private http: Http) { }
 
   getGroups() {
@@ -14,6 +15,13 @@ export class GroupsService {
               .toPromise()
               .then(response => response.json())
               .catch(this.handleError);
+  }
+
+  getForms(id: number): Promise<Hero[]> {
+    return this.http.get(this.apiSiteForms+"/"+id)
+               .toPromise()
+               .then(response => response.json() as Hero[])
+               .catch(this.handleError);
   }
 
   private handleError(error: any) {

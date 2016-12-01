@@ -3,7 +3,7 @@ import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { Hero }        from '../../hero';
-import { HeroService } from '../../hero.service';
+import { GroupsService } from '../../services/groups/groups.service'
 @Component({
   moduleId: module.id,
   selector: 'my-hero-detail',
@@ -13,13 +13,13 @@ import { HeroService } from '../../hero.service';
 export class SiteFormsComponent implements OnInit {
   siteForms: Hero[];
   constructor(
-    private heroService: HeroService,
+    private groupService: GroupsService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
   ngOnInit(): void {
     this.route.params
-      .switchMap((params: Params) => this.heroService.getForms(+params['id']))
+      .switchMap((params: Params) => this.groupService.getForms(+params['id']))
       .subscribe(siteForms => this.siteForms = siteForms);
   }
   goBack(): void {

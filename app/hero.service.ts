@@ -14,13 +14,7 @@ export class HeroService {
                .then(response => response.json() as Hero[])
                .catch(this.handleError);
   }
-  getForms(id: number): Promise<Hero[]> {
-    return this.http.get(this.heroesUrl)
-               .toPromise()
-               .then(response => response.json() as Hero[])
-               .catch(this.handleError);
-  }
-  
+    
   getHero(id: number): Promise<Hero> {
     return this.getHeroes()
                .then(heroes => heroes.find(hero => hero.id === id));

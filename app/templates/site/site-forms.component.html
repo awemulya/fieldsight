@@ -1,13 +1,16 @@
-Site forms list here !!
+<div >Forms Assigned</div>
 
 
 
-<ul class="heroes">
-  <li *ngFor="let form of siteForms" (click)="onSelect(form)"
+<div class="heroes">
+  <div *ngFor="let form of siteForms" (click)="onSelect(form)"
       [class.selected]="form === selectedForm">
-    <span>{{form.name}}</span>
-    <button>View Submission Data</button>
-  <button>Form Detail</button>
-  </li> 
-</ul>
+    <span>Name: {{form.name}}</span>
+    <span>Description: {{form.descriptionText}}</span>
+    <span>Staged: {{form.is_staged}}</span>
+    <span>Scheduled:{{form.is_scheduled}}</span>
+    <a href ="http://localhost:8001/forms/reports/{{form.id}}">View Submission Data</a>
+    <a href ="http://localhost:8000/">View Form</a>
+  </div> 
+</div>
  <button (click)="goBack()">Back</button>
