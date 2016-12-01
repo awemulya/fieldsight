@@ -5,8 +5,8 @@ import { Hero }                from '../../hero';
 
 @Injectable()
 export class GroupsService {
-  private apiURL = 'http://192.168.1.107:8001/forms/api/groups';  // URL to web api
-  private heroesUrl = 'http://192.168.1.107:8001/fieldsight/api/site';  // URL to web api
+  private apiURL = 'http://192.168.1.17:8001/forms/api/groups';  // URL to web api
+  private heroesUrl = 'http://192.168.1.17:8001/fieldsight/api/site';  // URL to web api
   constructor(private http: Http) { }
 
   getGroups() {

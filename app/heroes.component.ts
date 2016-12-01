@@ -6,7 +6,7 @@ import { HeroService }         from './hero.service';
   moduleId: module.id,
   selector: 'my-heroes',
   templateUrl: 'heroes.component.html',
-  styleUrls: [ 'heroes.component.css' ]
+  styleUrls: [ ]
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
@@ -44,7 +44,10 @@ export class HeroesComponent implements OnInit {
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
   }
-  gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedHero.id]);
+  gotoDetail(siteID: string): void {
+    this.router.navigate(['/detail', siteID]);
+  }
+  gotoSiteForms(siteID: string): void {
+    this.router.navigate(['/site-forms', siteID]);
   }
 }

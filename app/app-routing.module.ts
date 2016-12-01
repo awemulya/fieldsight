@@ -5,11 +5,13 @@ import { HeroesComponent }      from './heroes.component';
 import { GroupsComponent }      from './components/groups/groups.component';
 import { AddStageComponent }      from './components/stage/add-stage.component';
 import { HeroDetailComponent }  from './hero-detail.component';
+import { SiteFormsComponent }  from './components/site/site-forms.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'heroes',     component: HeroesComponent },
+  { path: 'site-forms/:id', component: SiteFormsComponent },
+  { path: 'sites',     component: HeroesComponent },
   { path: 'forms',     component: GroupsComponent },
   { path: 'stage/add/:id',     component: AddStageComponent }
 ];

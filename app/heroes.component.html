@@ -1,22 +1,24 @@
 <h2>My Sites</h2>
-<div>
+<!-- <div>
   <label>Site name:</label> <input #heroName />
   <button (click)="add(heroName.value); heroName.value=''">
     Add
   </button>
-</div>
+</div> -->
 <ul class="heroes">
   <li *ngFor="let hero of heroes" (click)="onSelect(hero)"
       [class.selected]="hero === selectedHero">
     <span class="badge">{{hero.id}}</span>
     <span>{{hero.name}}</span>
-    <button class="delete"
-      (click)="delete(hero); $event.stopPropagation()">x</button>
+    <button (click)="gotoDetail(hero.id)">View /Edit</button>
+  <button (click)="gotoSiteForms(hero.id)">Site Forms</button>
   </li> 
 </ul>
 <div *ngIf="selectedHero">
   <h2>
-    {{selectedHero.name | uppercase}} is my hero
+    {{selectedHero.name | uppercase}}
+  <button (click)="gotoDetail(selectedHero.id)">View /Edit</button>
+  <button (click)="gotoSiteForms(selectedHero.id)">Site Forms</button>
+    
   </h2>
-  <button (click)="gotoDetail()">View Details</button>
 </div>

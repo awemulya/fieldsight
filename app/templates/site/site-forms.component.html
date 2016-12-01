@@ -1,0 +1,13 @@
+Site forms list here !!
+
+
+
+<ul class="heroes">
+  <li *ngFor="let form of siteForms" (click)="onSelect(form)"
+      [class.selected]="form === selectedForm">
+    <span>{{form.name}}</span>
+    <button>View Submission Data</button>
+  <button>Form Detail</button>
+  </li> 
+</ul>
+ <button (click)="goBack()">Back</button>

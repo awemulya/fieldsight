@@ -14,6 +14,7 @@ import { HeroService }          from './hero.service';
 import { GroupsService }      from './services/groups/groups.service';
 import { HeroSearchComponent }  from './hero-search.component';
 import { AddStageComponent }  from './components/stage/add-stage.component';
+import { SiteFormsComponent }  from './components/site/site-forms.component';
 @NgModule({
   imports: [
     BrowserModule,
@@ -28,7 +29,8 @@ import { AddStageComponent }  from './components/stage/add-stage.component';
     HeroesComponent,
     HeroSearchComponent,
     GroupsComponent,
-    AddStageComponent
+    AddStageComponent,
+    SiteFormsComponent
   ],
   providers: [ HeroService, GroupsService ],
   bootstrap: [ AppComponent ]
