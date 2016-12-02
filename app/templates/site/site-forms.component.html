@@ -1,20 +1,104 @@
-<div >Forms Assigned To This Site</div>
+<button class="btn btn-default" type="button">New Form</button>
 
-<div>
-<button (click)="assignNew()">Assign New Form</button>
+<div class="container">
+  <div>
+    <form class="form-horizontal">
+      <fieldset>
+        <legend>Assign New Form</legend>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="xf">Select Form</label>
+
+          <div class="col-md-4">
+            <select class="form-control" id="xf" name="xf" required="">
+              <option>
+                {{i.type}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="sharedlevel">Select Form
+          Type</label>
+
+          <div class="col-md-4">
+            <select name="formType">
+              <option>
+                {{i.type}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="schedule">Select
+          Schedule</label>
+
+          <div class="col-md-4">
+            <select id="schedule" name="formType">
+              <option>
+                {{i.type}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="schedule">Select Stage</label>
+
+          <div class="col-md-4">
+            <select id="stage" name="formType">
+              <option>
+                {{i.type}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="sharedlevel">Select Shared
+          Level</label>
+
+          <div class="col-md-4">
+            <select name="sharedlevel">
+              <option>
+                {{i.type}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-8">
+            <button class="btn btn-success" id="button1id" name="button1id" type=
+            "submit">Save</button> <button class="btn btn-danger" id="button2id"
+            name="button2id" type="button">Reset</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </div>
-
 
 
 <div class="heroes">
-  <div *ngFor="let form of siteForms" (click)="onSelect(form)"
-      [class.selected]="form === selectedForm">
-    <span>Name: <b>{{form.name}}</b></span>
-    <span>Description: {{form.descriptionText}}</span>
-    <span>Staged: {{form.is_staged}}</span>
-    <span>Scheduled:{{form.is_scheduled}}</span>
-    <a href ="http://localhost:8001/forms/reports/{{form.id}}">View Submission Data</a>
-    <a href ="http://localhost:8000/">Preview Form</a>
-  </div> 
+  <div>
+    Forms Assigned To This Site
+  </div>
+
+
+  <div>
+    <span>Name: <b>{{form.name}}</b></span> <span>Description:
+    {{form.descriptionText}}</span> <span>Staged: {{form.is_staged}}</span>
+    <span>Scheduled:{{form.is_scheduled}}</span> <a href=
+    "http://localhost:8001/forms/reports/{{form.id}}">View Submission Data</a>
+    <a href="http://localhost:8000/">Preview Form</a>
+  </div>
 </div>
- <button (click)="goBack()">Back</button>
+<button>Back</button>
