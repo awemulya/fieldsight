@@ -2,6 +2,7 @@ import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Hero }                from '../../hero';
+import { FieldsightXF } from '../../models/fieldsightxf';
 
 @Injectable()
 export class GroupsService {
@@ -17,10 +18,10 @@ export class GroupsService {
               .catch(this.handleError);
   }
 
-  getForms(id: number): Promise<Hero[]> {
+  getForms(id: number): Promise<FieldsightXF[]> {
     return this.http.get(this.apiSiteForms+"/"+id)
                .toPromise()
-               .then(response => response.json() as Hero[])
+               .then(response => response.json() as FieldsightXF[])
                .catch(this.handleError);
   }
 

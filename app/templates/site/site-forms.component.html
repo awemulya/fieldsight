@@ -1,8 +1,8 @@
-<button class="btn btn-default" type="button">New Form</button>
+<button class="btn btn-default" type="button" (click)="newForm()">New Form</button>
 
-<div class="container">
+<div class="container" *ngIf="displayForm">
   <div>
-    <form class="form-horizontal">
+    <form class="form-horizontal" (ngSubmit)="onSubmit()" #siteForm="ngForm">
       <fieldset>
         <legend>Assign New Form</legend>
 
@@ -10,75 +10,67 @@
           <label class="col-md-4 control-label" for="xf">Select Form</label>
 
           <div class="col-md-4">
-            <select class="form-control" id="xf" name="xf" required="">
-              <option>
-                {{i.type}}
-              </option>
+            <select class="form-control" id="xf" name="xf" required
+            [(ngModel)]="model.xf" #xf="ngModel" >
+              <option *ngFor="let xf of shared_levels" [value]="xf.id">{{xf.type}}</option>
             </select>
           </div>
         </div>
-
 
         <div class="form-group">
-          <label class="col-md-4 control-label" for="sharedlevel">Select Form
-          Type</label>
+          <label class="col-md-4 control-label" for="formtype">Select Form Type </label>
 
           <div class="col-md-4">
-            <select name="formType">
-              <option>
-                {{i.type}}
-              </option>
+            <select class="form-control" id="formtype" name="formtype" required
+            [(ngModel)]="formType" (change)="onChange($event.target.value)">
+              <option value="1">Staged </option>
+              <option value="2">Scheduled </option>
+              <option value="3">Normal </option>
             </select>
           </div>
         </div>
 
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="schedule">Select
-          Schedule</label>
+        <div class="form-group" *ngIf="model.is_staged">
+          <label class="col-md-4 control-label" for="stage">Select Stage</label>
 
           <div class="col-md-4">
-            <select id="schedule" name="formType">
-              <option>
-                {{i.type}}
-              </option>
+            <select class="form-control" id="stage" name="stage" required
+            [(ngModel)]="model.stage" #stage="ngModel" >
+              <option *ngFor="let xf of shared_levels" [value]="xf.id">{{xf.type}}</option>
             </select>
           </div>
         </div>
 
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="schedule">Select Stage</label>
+        <div class="form-group" *ngIf="model.is_scheduled">
+          <label class="col-md-4 control-label" for="stage">Select Schedule</label>
 
           <div class="col-md-4">
-            <select id="stage" name="formType">
-              <option>
-                {{i.type}}
-              </option>
+            <select class="form-control" id="stage" name="stage" required
+            [(ngModel)]="model.stage" #stage="ngModel" >
+              <option *ngFor="let xf of shared_levels" [value]="xf.id">{{xf.type}}</option>
             </select>
           </div>
         </div>
 
-
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="sharedlevel">Select Shared
-          Level</label>
+         <div class="form-group">
+          <label class="col-md-4 control-label" for="shared_level">Share This Form To</label>
 
           <div class="col-md-4">
-            <select name="sharedlevel">
-              <option>
-                {{i.type}}
-              </option>
+            <select class="form-control" id="shared_level" name="shared_level"
+            [(ngModel)]="model.shared_level" >
+               <option value="1">Global </option>
+              <option value="2">Organization </option>
+              <option value="3">Private </option>
             </select>
           </div>
         </div>
-
 
         <div class="form-group">
           <div class="col-md-8">
             <button class="btn btn-success" id="button1id" name="button1id" type=
-            "submit">Save</button> <button class="btn btn-danger" id="button2id"
-            name="button2id" type="button">Reset</button>
+            "submit" [disabled]="!siteForm.form.valid">Save</button> 
+            <button class="btn btn-danger" id="button2id"
+            name="button2id" type="button" (click)="siteForm.reset()">Reset</button>
           </div>
         </div>
       </fieldset>
@@ -87,13 +79,13 @@
 </div>
 
 
-<div class="heroes">
+<div class="heroes" *ngIf="!displayForm">
   <div>
     Forms Assigned To This Site
   </div>
 
 
-  <div>
+  <div *ngFor="let form of siteForms">
     <span>Name: <b>{{form.name}}</b></span> <span>Description:
     {{form.descriptionText}}</span> <span>Staged: {{form.is_staged}}</span>
     <span>Scheduled:{{form.is_scheduled}}</span> <a href=

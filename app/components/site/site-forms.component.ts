@@ -32,14 +32,23 @@ export class SiteFormsComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.groupService.getForms(+params['id']))
       .subscribe(siteForms => this.siteForms = siteForms);
-     this.sub = this.route.params.subscribe(params => {
+     this.route.params.subscribe(params => {
        this.id = +params['id'];
        });
 
   }
 
-  onSubmit() { this.submitted = true; }
-  newHero() {
+  onSubmit() { this.submitted = true;
+    if(this.model.is_staged == true && !this.model.stage){
+      alert("Stage Data Missing");  
+    }
+     if(this.model.is_scheduled == true && !this.model.schedule){
+      alert("Schedule Data Missing");  
+    }
+    al
+
+   }
+  newForm() {
     this.displayForm = true;
     this.model = new FieldsightXF(undefined,undefined,this.id,false,false,undefined,undefined,2);
   }
@@ -48,7 +57,7 @@ export class SiteFormsComponent implements OnInit {
     this.location.back();
   }
 
-  setStageSchedule(formtype){
+  setStageSchedule(formtype: number){
 
     if(formtype == 1){
       this.model.is_staged = true;
@@ -62,69 +71,11 @@ export class SiteFormsComponent implements OnInit {
     }
   }
 
-  onChange(newValue) {
+  onChange(newValue:number) {
     this.formType = newValue;
     this.setStageSchedule(newValue);
 }
-  onChangeSharedLevel(newValue) {
+  onChangeSharedLevel(newValue:number) {
     this.model.shared_level = newValue;
 }
 }
-
-
-
-// import { Component, OnInit }      from '@angular/core';
-// import { ActivatedRoute, Params } from '@angular/router';
-// import { Location }               from '@angular/common';
-// import 'rxjs/add/operator/switchMap';
-// import { FieldsightXF }        from '../../models/fieldsightxf';
-// import { GroupsService } from '../../services/groups/groups.service';
-
-// @Component({
-//   moduleId: module.id,
-//   selector: 'site-forms',
-//   templateUrl: '../../templates/site/site-forms.component.html',
-//   styleUrls: [ '' ]
-// })
-// export class SiteFormsComponent implements OnInit {
-//   siteForms: FieldsightXF[];
-//   id: number;
-//   submitted = false;
-
-//   powers = [1, 2];
-
-//   shared_levels = [1,2];
-//   model = new FieldsightXF();
-  
-//   constructor(
-//     private groupService: GroupsService,
-//     private route: ActivatedRoute,
-//     private location: Location
-//   ) {}
-  
-//   ngOnInit(): void {
-//     this.route.params
-//       .switchMap((params: Params) => this.groupService.getForms(+params['id']))
-//       .subscribe(siteForms => this.siteForms = siteForms);
-//      this.sub = this.route.params.subscribe(params => {
-//        this.id = +params['id'];
-//        });
-
-//        this.model.shared_level = this.shared_levels[0];
-  
-      
-//   }
-//   goBack(): void {
-//     this.location.back();
-//   }
-
-  
-  
-//   onSubmit() { this.submitted = true; }
-  
-//   newHero() {
-    
-//   }
-//   get diagnostic() { return JSON.stringify(this.model); }
-  
-// }
