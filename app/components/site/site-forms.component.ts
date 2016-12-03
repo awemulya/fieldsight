@@ -40,12 +40,11 @@ export class SiteFormsComponent implements OnInit {
 
   onSubmit() { this.submitted = true;
     if(this.model.is_staged == true && !this.model.stage){
-      alert("Stage Data Missing");  
+      this.model.stage.value.markAsDirty();
     }
      if(this.model.is_scheduled == true && !this.model.schedule){
-      alert("Schedule Data Missing");  
+     this.model.schedule.value.markAsDirty();
     }
-    al
 
    }
   newForm() {
