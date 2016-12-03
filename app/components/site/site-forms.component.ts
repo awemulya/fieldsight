@@ -22,7 +22,6 @@ export class SiteFormsComponent implements OnInit {
   schedules: Schedule[];
   displayForm = false;
   model = new FieldsightXF(undefined,undefined,undefined,false,false,undefined,undefined,2);
-  submitted = false;
   formType = 3;
   formTypes = [{'id': 1, type:"Staged"},{'id': 2, type:"Scheduled"},{'id': 3, type:"Normal"}]
   shared_levels = [{'id': 1, type:"Global"},{'id': 2, type:"Organization"},{'id': 3, type:"Private"}]
@@ -45,9 +44,10 @@ export class SiteFormsComponent implements OnInit {
      }
 
   onSubmit() { 
-    this.submitted = true;
-    alert("Form Saved")
+    this.saveAssignedForm();
+    this.reloadForms();
     this.displayForm = false;
+    // this.groupService.getForms(this.id) reload site forms again
     // if(this.model.is_staged == true && !this.model.stage){
     //   this.model.stage.value.markAsDirty();
     // }else if(this.model.is_scheduled == true && !this.model.schedule){
@@ -110,8 +110,11 @@ export class SiteFormsComponent implements OnInit {
         .then(schedules => this.schedules = schedules);
   }
   reloadForms(){
-    this.xformService.getForms()
-        .then(xForms => this.xForms = xForms);
+    this.groupService.getForms()
+        .then(xForms => this.siteForms = xForms);
 
+  }
+  saveAssignedForm(){
+    this.xformService.saveAssignedForm(this.model);
   }
 }

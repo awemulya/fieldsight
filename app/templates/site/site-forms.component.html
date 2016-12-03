@@ -2,7 +2,7 @@
 
 <div class="container" *ngIf="displayForm">
   <div>
-    <form class="form-horizontal" (ngSubmit)="onSubmit()" #siteForm="ngForm">
+    <form class="form-horizontal" #siteForm="ngForm">
       <fieldset>
         <legend>Assign New Form</legend>
 
@@ -74,8 +74,8 @@
 
         <div class="form-group">
           <div class="col-md-8">
-            <button class="btn btn-success" id="button1id" name="button1id" type=
-            "submit" [disabled]="!siteForm.form.valid">Save</button> 
+            <button class="btn btn-success" id="button1id" name="button1id" 
+             [disabled]="!siteForm.form.valid" (click)="onSubmit()">Save</button> 
             <button class="btn btn-danger" id="button2id"
             name="button2id" type="button" (click)="siteForm.reset()">Reset</button>
           </div>
