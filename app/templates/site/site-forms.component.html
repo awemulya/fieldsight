@@ -1,4 +1,4 @@
-<button class="btn btn-default" type="button" (click)="newForm()">New Form</button>
+<button class="btn btn-default" type="button" (click)="newForm()" *ngIf="!displayForm">New Form</button>
 
 <div class="container" *ngIf="displayForm">
   <div>
@@ -34,8 +34,7 @@
           <label class="col-md-4 control-label" for="stage">Select Stage</label>
 
           <div class="col-md-4">
-            <select class="form-control" id="stage" name="stage" required
-            [(ngModel)]="model.stage" #stage="ngModel" >
+            <select class="form-control" id="stage" name="stage" [(ngModel)]="model.stage" #stage="ngModel" >
               <option *ngFor="let xf of shared_levels" [value]="xf.id">{{xf.type}}</option>
             </select>
           </div>
@@ -45,8 +44,7 @@
           <label class="col-md-4 control-label" for="stage">Select Schedule</label>
 
           <div class="col-md-4">
-            <select class="form-control" id="stage" name="stage" required
-            [(ngModel)]="model.stage" #stage="ngModel" >
+            <select class="form-control" id="schedule" name="schedule" [(ngModel)]="model.stage" #schedule="ngModel" >
               <option *ngFor="let xf of shared_levels" [value]="xf.id">{{xf.type}}</option>
             </select>
           </div>

@@ -38,13 +38,16 @@ export class SiteFormsComponent implements OnInit {
 
   }
 
-  onSubmit() { this.submitted = true;
-    if(this.model.is_staged == true && !this.model.stage){
-      this.model.stage.value.markAsDirty();
-    }
-     if(this.model.is_scheduled == true && !this.model.schedule){
-     this.model.schedule.value.markAsDirty();
-    }
+  onSubmit() { 
+    this.submitted = true;
+    // if(this.model.is_staged == true && !this.model.stage){
+    //   this.model.stage.value.markAsDirty();
+    // }else if(this.model.is_scheduled == true && !this.model.schedule){
+    //  this.model.schedule.value.markAsDirty();
+    // }else{
+
+    //   console.log(this.model.xf);
+    // }
 
    }
   newForm() {
