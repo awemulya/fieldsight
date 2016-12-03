@@ -12,6 +12,8 @@ import { HeroesComponent }      from './heroes.component';
 import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }          from './hero.service';
 import { GroupsService }      from './services/groups/groups.service';
+import { XformService }      from './services/xform/xform.service';
+import { StageService }      from './services/stage/stage.service';
 import { HeroSearchComponent }  from './hero-search.component';
 import { AddStageComponent }  from './components/stage/add-stage.component';
 import { SiteFormsComponent }  from './components/site/site-forms.component';
@@ -32,7 +34,7 @@ import { SiteFormsComponent }  from './components/site/site-forms.component';
     AddStageComponent,
     SiteFormsComponent
   ],
-  providers: [ HeroService, GroupsService ],
+  providers: [ HeroService, GroupsService, XformService, StageService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

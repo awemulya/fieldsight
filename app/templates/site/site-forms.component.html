@@ -7,20 +7,23 @@
         <legend>Assign New Form</legend>
 
         <div class="form-group">
-          <label class="col-md-4 control-label" for="xf">Select Form</label>
+          <label class="col-sm-4 control-label" for="xf">Select Form</label>
 
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <select class="form-control" id="xf" name="xf" required
             [(ngModel)]="model.xf" #xf="ngModel" >
-              <option *ngFor="let xf of shared_levels" [value]="xf.id">{{xf.type}}</option>
+              <option *ngFor="let xf of xForms" [value]="xf.id">{{xf.title}}</option>
             </select>
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-default" type="button" (click)="reloadForms()">Refresh</button>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="col-md-4 control-label" for="formtype">Select Form Type </label>
+          <label class="col-sm-4 control-label" for="formtype">Select Form Type </label>
 
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <select class="form-control" id="formtype" name="formtype" required
             [(ngModel)]="formType" (change)="onChange($event.target.value)">
               <option value="1">Staged </option>
@@ -30,30 +33,36 @@
           </div>
         </div>
 
-        <div class="form-group" *ngIf="model.is_staged">
-          <label class="col-md-4 control-label" for="stage">Select Stage</label>
+        <div class="form-group" *ngIf="formType==1">
+          <label class="col-sm-4 control-label" for="stage">Select Stage</label>
 
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <select class="form-control" id="stage" name="stage" [(ngModel)]="model.stage" #stage="ngModel" >
-              <option *ngFor="let xf of shared_levels" [value]="xf.id">{{xf.type}}</option>
+              <option *ngFor="let xf of stages" [value]="xf.id">{{xf.name}}: order {{xf.order}}: of Main Stage {{xf.main_stage}}</option>
             </select>
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-default" type="button" (click)="addStage()">Add Stage</button>
           </div>
         </div>
 
-        <div class="form-group" *ngIf="model.is_scheduled">
-          <label class="col-md-4 control-label" for="stage">Select Schedule</label>
+        <div class="form-group" *ngIf="formType==2">
+          <label class="col-sm-4 control-label" for="stage">Select Schedule</label>
 
-          <div class="col-md-4">
-            <select class="form-control" id="schedule" name="schedule" [(ngModel)]="model.stage" #schedule="ngModel" >
-              <option *ngFor="let xf of shared_levels" [value]="xf.id">{{xf.type}}</option>
+          <div class="col-sm-4">
+            <select class="form-control" id="schedule" name="schedule" [(ngModel)]="model.schedule" #schedule="ngModel" >
+              <option *ngFor="let xf of schedules" [value]="xf.id">{{xf.name}} Range :{{xf.date_range_start}} to : {{xf.date_range_end}} : days {{xf.days}}</option>
             </select>
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-default" type="button" (click)="addSchedule()">Add Schedule</button>
           </div>
         </div>
 
          <div class="form-group">
-          <label class="col-md-4 control-label" for="shared_level">Share This Form To</label>
+          <label class="col-sm-4 control-label" for="shared_level">Share This Form To</label>
 
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <select class="form-control" id="shared_level" name="shared_level"
             [(ngModel)]="model.shared_level" >
                <option value="1">Global </option>

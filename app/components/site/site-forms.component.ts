@@ -4,7 +4,9 @@ import { Location }               from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 import { GroupsService } from '../../services/groups/groups.service';
-import { FieldsightXF } from '../../models/fieldsightxf';
+import { XformService } from '../../services/xform/xform.service';
+import { StageService } from '../../services/stage/stage.service';
+import { FieldsightXF, Xform, Stage, Schedule } from '../../models/fieldsightxf';
 
 @Component({
   moduleId: module.id,
@@ -15,6 +17,9 @@ import { FieldsightXF } from '../../models/fieldsightxf';
 export class SiteFormsComponent implements OnInit {
   id: number;
   siteForms: FieldsightXF[];
+  xForms: Xform[];
+  stages: Stage[];
+  schedules: Schedule[];
   displayForm = false;
   model = new FieldsightXF(undefined,undefined,undefined,false,false,undefined,undefined,2);
   submitted = false;
@@ -24,6 +29,8 @@ export class SiteFormsComponent implements OnInit {
 
     constructor(
     private groupService: GroupsService,
+    private xformService: XformService,
+    private stageService: StageService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
@@ -35,11 +42,12 @@ export class SiteFormsComponent implements OnInit {
      this.route.params.subscribe(params => {
        this.id = +params['id'];
        });
-
-  }
+     }
 
   onSubmit() { 
     this.submitted = true;
+    alert("Form Saved")
+    this.displayForm = false;
     // if(this.model.is_staged == true && !this.model.stage){
     //   this.model.stage.value.markAsDirty();
     // }else if(this.model.is_scheduled == true && !this.model.schedule){
@@ -52,6 +60,7 @@ export class SiteFormsComponent implements OnInit {
    }
   newForm() {
     this.displayForm = true;
+    this.getXforms()
     this.model = new FieldsightXF(undefined,undefined,this.id,false,false,undefined,undefined,2);
   }
 
@@ -64,12 +73,18 @@ export class SiteFormsComponent implements OnInit {
     if(formtype == 1){
       this.model.is_staged = true;
       this.model.is_scheduled = false;
+      this.model.schedule = undefined;
+      this.getStages();
     }else if(formtype == 2){
       this.model.is_staged = false;
       this.model.is_scheduled = true;
-    }else{
+      this.model.stage = undefined;
+      this.getSchedules();
+    }else if(formtype == 3){
       this.model.is_staged = false;
       this.model.is_scheduled = false;
+      this.model.stage = undefined;
+      this.model.schedule = undefined;
     }
   }
 
@@ -80,4 +95,23 @@ export class SiteFormsComponent implements OnInit {
   onChangeSharedLevel(newValue:number) {
     this.model.shared_level = newValue;
 }
+   getXforms(){
+
+     this.xformService.getForms()
+        .then(xForms => this.xForms = xForms);
+   }
+
+  getStages(){
+    this.stageService.getStages()
+        .then(stages => this.stages = stages);
+  }
+  getSchedules(){
+    this.stageService.getSchedules()
+        .then(schedules => this.schedules = schedules);
+  }
+  reloadForms(){
+    this.xformService.getForms()
+        .then(xForms => this.xForms = xForms);
+
+  }
 }

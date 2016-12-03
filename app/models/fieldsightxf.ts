@@ -11,3 +11,33 @@ export class FieldsightXF {
     
   ) {  }
 }
+
+export class Xform{
+
+    constructor(
+    public id: number,
+    public title: string,
+        ){}
+}
+
+export class Stage{
+
+    constructor(
+    public id: number,
+    public order: number,
+    public stage: number,
+    public name: string,
+    public description: string,
+    public main_stage: string,
+        ){}
+}
+export class Schedule{
+
+    constructor(
+    public id: number,
+    public name: string,
+    public days: string,
+    public date_range_start: string,
+    public date_range_end: string,
+        ){}
+}
