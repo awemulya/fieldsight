@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.model = new User("", "");
     if(localStorage.getItem('token')){
-      console.log(localStorage.getItem('token');
+    console.log(localStorage.getItem('token'));
 
     this.router.navigate(['/dashboard']);
       
@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
     if(this.token){
           console.log("login sucess");
           localStorage.setItem('token', this.token);
-          console.log(localStorage.getItem('token');
+          console.log(localStorage.getItem('token'));
           this.router.navigate(['/dashboard/']);
           // this.userService.setToken(this.token);
           // this.localStorageService.set("token", this.token);
