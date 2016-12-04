@@ -31,7 +31,8 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.model = new User("", "");
-    if(this.token){
+    if(localStorage.getItem('token')){
+      console.log(localStorage.getItem('token');
 
     this.router.navigate(['/dashboard']);
       
@@ -44,7 +45,9 @@ export class UserComponent implements OnInit {
         .then(user => this.token = user.token);
     if(this.token){
           console.log("login sucess");
-          this.router.navigate(['/dashboard']);
+          localStorage.setItem('token', this.token);
+          console.log(localStorage.getItem('token');
+          this.router.navigate(['/dashboard/']);
           // this.userService.setToken(this.token);
           // this.localStorageService.set("token", this.token);
     }else{
