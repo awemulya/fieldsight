@@ -1,3 +1,8 @@
+<div>
+ version: {{version}}
+</div><div>
+ username: {{username}}
+</div>
 <button class="btn btn-default" type="button" (click)="newForm()" *ngIf="!displayForm">New Form</button>
 
 <div class="container" *ngIf="displayForm">
@@ -100,4 +105,4 @@
     <a href="http://localhost:8000/">Preview Form</a>
   </div>
 </div>
-<button>Back</button>
+  <button (click)="goBack()">Back</button>

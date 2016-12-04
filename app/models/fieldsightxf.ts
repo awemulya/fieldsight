@@ -20,6 +20,18 @@ export class Xform{
         ){}
 }
 
+export class User {
+  constructor(
+    public email_or_username: string,
+    public password: string) { }
+}
+
+export class Token {
+  constructor(
+    public token: string,) { }
+}
+
+
 export class Stage{
 
     constructor(

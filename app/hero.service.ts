@@ -2,10 +2,11 @@ import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Hero } from './hero';
+import myGlobals = require('./globals');
 @Injectable()
 export class HeroService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private heroesUrl = 'http://192.168.1.17:8001/fieldsight/api/site';  // URL to web api
+  private heroesUrl = myGlobals.KOBOCAT_URL+"/fieldsight/api/site";  // URL to web api
   constructor(private http: Http) { }
  
   getHeroes(): Promise<Hero[]> {

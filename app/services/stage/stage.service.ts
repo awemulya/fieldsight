@@ -2,11 +2,13 @@ import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Stage, Schedule } from '../../models/fieldsightxf';
+import myGlobals = require('../../globals');
 
 @Injectable()
 export class StageService {
-  private apiURL = 'http://192.168.1.17:8001/forms/api/stage';  // URL to groups api
-  private scheduleapiURL = 'http://192.168.1.17:8001/forms/api/schedule';  // URL to groups api
+  private koboURL = myGlobals.KOBOCAT_URL
+  private apiURL = this.koboURL + '/forms/api/stage';  // URL to groups api
+  private scheduleapiURL = this.koboURL + '/forms/api/schedule';  // URL to groups api
   constructor(private http: Http) { }
 
   

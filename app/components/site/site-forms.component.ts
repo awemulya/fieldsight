@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 import { GroupsService } from '../../services/groups/groups.service';
 import { XformService } from '../../services/xform/xform.service';
+import { UserService } from '../../services/user/user.service';
 import { StageService } from '../../services/stage/stage.service';
 import { FieldsightXF, Xform, Stage, Schedule } from '../../models/fieldsightxf';
+import myGlobals = require('../../globals');
 
 @Component({
   moduleId: module.id,
@@ -15,14 +17,16 @@ import { FieldsightXF, Xform, Stage, Schedule } from '../../models/fieldsightxf'
 })
 
 export class SiteFormsComponent implements OnInit {
-  id: number;
+  siteId: number;
   siteForms: FieldsightXF[];
   xForms: Xform[];
   stages: Stage[];
   schedules: Schedule[];
   displayForm = false;
-  model = new FieldsightXF(undefined,undefined,undefined,false,false,undefined,undefined,2);
-  formType = 3;
+  version = myGlobals.version
+  username = myGlobals.username
+  formType = 3
+  model = new FieldsightXF(undefined, undefined, undefined, false, false, undefined, undefined, 2);
   formTypes = [{'id': 1, type:"Staged"},{'id': 2, type:"Scheduled"},{'id': 3, type:"Normal"}]
   shared_levels = [{'id': 1, type:"Global"},{'id': 2, type:"Organization"},{'id': 3, type:"Private"}]
 
@@ -30,6 +34,7 @@ export class SiteFormsComponent implements OnInit {
     private groupService: GroupsService,
     private xformService: XformService,
     private stageService: StageService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private location: Location
   ) {}
@@ -39,7 +44,7 @@ export class SiteFormsComponent implements OnInit {
       .switchMap((params: Params) => this.groupService.getForms(+params['id']))
       .subscribe(siteForms => this.siteForms = siteForms);
      this.route.params.subscribe(params => {
-       this.id = +params['id'];
+       this.siteId = +params['id'];
        });
      }
 
@@ -61,7 +66,7 @@ export class SiteFormsComponent implements OnInit {
   newForm() {
     this.displayForm = true;
     this.getXforms()
-    this.model = new FieldsightXF(undefined,undefined,this.id,false,false,undefined,undefined,2);
+    this.model = new FieldsightXF(undefined,undefined,this.siteId,false,false,undefined,undefined,2);
   }
 
   goBack(): void {
@@ -110,11 +115,15 @@ export class SiteFormsComponent implements OnInit {
         .then(schedules => this.schedules = schedules);
   }
   reloadForms(){
-    this.groupService.getForms()
-        .then(xForms => this.siteForms = xForms);
+    this.groupService.getForms(this.siteId)
+        .then(siteForms => this.siteForms = siteForms);
 
   }
   saveAssignedForm(){
     this.xformService.saveAssignedForm(this.model);
   }
+
+  getToken() {
+      return this.userService.getToken();
+    }
 }

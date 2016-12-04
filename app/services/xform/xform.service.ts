@@ -2,14 +2,16 @@ import { Injectable }    from '@angular/core';
 import { Headers, Http, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Xform, FieldsightXF } from '../../models/fieldsightxf';
+import myGlobals = require('../../globals');
 
 @Injectable()
 export class XformService {
-  private apiURL = 'http://192.168.1.17:8001/forms/api/xform';  
-  private assignURL = 'http://192.168.1.17:8001/forms/api/fsxform/';  // URL to save fsxf
+  private koboURL = myGlobals.KOBOCAT_URL;
+  private apiURL = this.koboURL + '/forms/api/xform';  
+  private assignURL = this.koboURL + '/forms/api/fsxform/';  // URL to save fsxf
   private headers = new Headers({ 'Content-Type': 'application/json' });
   // this.headers.append("Authorization", 'Bearer ' + localStorage.getItem('id_token'))
-  private options = new RequestOptions({ headers: this.headers });
+  private options = new RequestOptions({ headers: this.headers });// user token 
   constructor(private http: Http) { }
 
   

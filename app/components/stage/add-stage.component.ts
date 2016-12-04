@@ -5,6 +5,7 @@ import { GroupsService } from '../../services/groups/groups.service'
 import { HeroService } from '../../hero.service';
 
 import { Hero }                from '../../hero';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'dinosaurs',
