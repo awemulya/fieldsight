@@ -47,7 +47,7 @@
             </select>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-default" type="button" (click)="addStage()">Add Stage</button>
+            <button class="btn btn-default" type="button" (click)="newStageModalOpen()">Add Stage</button>
           </div>
         </div>
 
@@ -60,7 +60,7 @@
             </select>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-default" type="button" (click)="addSchedule()">Add Schedule</button>
+            <button class="btn btn-default" type="button" (click)="newScheduleOpen()">Add Schedule</button>
           </div>
         </div>
 
@@ -106,3 +106,36 @@
   </div>
 </div>
   <button (click)="goBack()">Back</button>
+
+
+
+  
+
+<!-- <add-schedule></add-schedule> tag here -->
+
+
+<modal #scheduleModal>
+    <modal-header >
+        <h4 class="modal-title">Add New Schedule</h4>
+    </modal-header>
+    <modal-body>
+        Schedule Form
+    </modal-body>
+    <modal-footer [show-default-buttons]="true"></modal-footer>
+</modal>
+
+<modal #stageModal>
+    <modal-header >
+        <h4 class="modal-title">Add New Stage</h4>
+    </modal-header>
+    <modal-body>
+        Stage Form
+    </modal-body>
+    <modal-footer [show-default-buttons]="true"></modal-footer>
+</modal>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+      <script src="node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.js"></script>
+

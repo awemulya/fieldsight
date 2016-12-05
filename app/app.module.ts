@@ -19,6 +19,8 @@ import { HeroSearchComponent }  from './hero-search.component';
 import { AddStageComponent }  from './components/stage/add-stage.component';
 import { SiteFormsComponent }  from './components/site/site-forms.component';
 import { UserComponent }  from './components/user/user.component';
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+
 // import {LocalStorageService, LocalStorageSubscriber} from 'angular2-localstorage/LocalStorageEmitter';
 
 
@@ -27,7 +29,8 @@ import { UserComponent }  from './components/user/user.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2Bs3ModalModule
   ],
   declarations: [
     AppComponent,

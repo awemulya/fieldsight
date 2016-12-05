@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewChild, AfterViewInit } from '@angular/core';
+import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
@@ -22,13 +24,23 @@ export class SiteFormsComponent implements OnInit {
   xForms: Xform[];
   stages: Stage[];
   schedules: Schedule[];
-  displayForm = false;
+  displayForm = false;  
+  displayAddStage = false;
+  displayAddSchedule = false;
   version = myGlobals.version
   username = myGlobals.username
   formType = 3
   model = new FieldsightXF(undefined, undefined, undefined, false, false, undefined, undefined, 2);
   formTypes = [{'id': 1, type:"Staged"},{'id': 2, type:"Scheduled"},{'id': 3, type:"Normal"}]
   shared_levels = [{'id': 1, type:"Global"},{'id': 2, type:"Organization"},{'id': 3, type:"Private"}]
+
+  @ViewChild('scheduleModal')
+  scheduleModal: ModalComponent;
+
+  @ViewChild('stageModal')
+  stageModal: ModalComponent;
+
+  
 
     constructor(
     private groupService: GroupsService,
@@ -47,6 +59,28 @@ export class SiteFormsComponent implements OnInit {
        this.siteId = +params['id'];
        });
      }
+
+
+
+    newScheduleClose() {
+        this.scheduleModal.close();
+        console.log("closed");
+    }
+
+    newScheduleOpen() {
+        this.scheduleModal.open();
+        console.log("opened");
+    }
+
+       newStageModalClose() {
+        this.stageModal.close();
+        console.log("closed");
+    }
+
+    newStageModalOpen() {
+        this.stageModal.open();
+        console.log("opened");
+    }
 
   onSubmit() { 
     this.saveAssignedForm();
@@ -125,5 +159,9 @@ export class SiteFormsComponent implements OnInit {
 
   getToken() {
       return this.userService.getToken();
+    }
+
+    addStage(){
+      this.displayAddStage = true;
     }
 }
