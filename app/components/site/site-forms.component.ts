@@ -34,6 +34,18 @@ export class SiteFormsComponent implements OnInit {
   formTypes = [{'id': 1, type:"Staged"},{'id': 2, type:"Scheduled"},{'id': 3, type:"Normal"}]
   shared_levels = [{'id': 1, type:"Global"},{'id': 2, type:"Organization"},{'id': 3, type:"Private"}]
 
+  days = [
+  {'index':0 , day: 'Monday',selected: false},
+  {'index':1 , day: 'Tuesday',selected: false},
+  {'index':2 , day: 'Wednesday',selected: false},
+  {'index':3 , day: 'Thursday',selected: false},
+  {'index':4 , day: 'Friday',selected: false},
+  {'index':5 , day: 'Saturday',selected: false},
+  {'index':6 , day: 'Sunday',selected: false}
+  ]
+  selectedDays = [];
+  new_schedule: Schedule = new Schedule(undefined,undefined,undefined,undefined,undefined,undefined);
+
   @ViewChild('scheduleModal')
   scheduleModal: ModalComponent;
 
@@ -68,6 +80,7 @@ export class SiteFormsComponent implements OnInit {
     }
 
     newScheduleOpen() {
+        this.new_schedule = new Schedule(undefined,undefined,undefined,undefined,undefined,undefined);
         this.scheduleModal.open();
         console.log("opened");
     }
@@ -163,5 +176,19 @@ export class SiteFormsComponent implements OnInit {
 
     addStage(){
       this.displayAddStage = true;
+    }
+
+    setSelected(selectElement:any) {
+        for (var i = 0; i < selectElement.options.length; i++) {
+            var optionElement = selectElement.options[i];
+            var optionModel = this.days[i];
+
+            if (optionElement.selected == true) { optionModel.selected = true; }
+            // else { optionModel.selected = false; }
+        }
+        this.getSelected();
+    }
+    getSelected(){
+      this.selectedDays = this.days.filter((item) => { return item.selected === true; });
     }
 }

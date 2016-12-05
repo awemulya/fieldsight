@@ -119,9 +119,77 @@
         <h4 class="modal-title">Add New Schedule</h4>
     </modal-header>
     <modal-body>
-        Schedule Form
+      <div class="container" *ngIf="displayForm">
+          <form class="form-horizontal" #siteForm="ngForm">
+            <fieldset>
+
+               <div class="form-group">
+                <label class="col-sm-4 control-label" for="day">Schedule Name</label>
+                <div class="col-sm-4">
+                     <input type="text" class="form-control" id="name"
+               required
+               [(ngModel)]="new_schedule.name" name="name"
+               #name="ngModel" >
+                </div>
+
+
+                <div class="col-sm-4">
+                  
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-4 control-label" for="start">Start Date</label>
+                <div class="col-sm-4">
+                     <input type="date" class="form-control" id="startdate"
+               required
+               [(ngModel)]="new_schedule.date_range_start" name="name"
+               #name="ngModel" >
+                </div>
+
+
+                <div class="col-sm-4">
+                  
+                </div>
+              </div>
+            
+             <div class="form-group">
+                <label class="col-sm-4 control-label" for="start">End Date</label>
+                <div class="col-sm-4">
+                     <input type="date" class="form-control" id="enddate"
+               required
+               [(ngModel)]="new_schedule.date_range_end" name="name"
+               #name="ngModel" >
+                </div>
+
+
+                <div class="col-sm-4">
+                  
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-4 control-label" for="day">Select Days</label>
+                <div class="col-sm-4" *ngFor="let sd of selectedDays">
+                    <span><b>{{sd.day}}</b>X</span>
+                </div>
+
+
+                <div class="col-sm-4">
+                  <select class="form-control" multiple (change)="setSelected($event.target)">
+                    <option *ngFor="let item of days" [value]="item.index">{{item.day}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </fieldset>
+          </form>
+        </div>
+
     </modal-body>
-    <modal-footer [show-default-buttons]="true"></modal-footer>
+    <modal-footer>
+      <button class="btn btn-default" type="button" (click)="newScheduleClose()">Save</button>
+  </modal-footer>
 </modal>
 
 <modal #stageModal>

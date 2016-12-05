@@ -49,6 +49,7 @@ export class Schedule{
     public id: number,
     public name: string,
     public days: string,
+    public selected_days: any,
     public date_range_start: string,
     public date_range_end: string,
         ){}
