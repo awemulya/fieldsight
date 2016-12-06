@@ -43,7 +43,7 @@ export class SiteFormsComponent implements OnInit {
   {'index':5 , day: 'Saturday',selected: false},
   {'index':6 , day: 'Sunday',selected: false}
   ]
-  selectedDays = [];
+  selectedDays: any;
   new_schedule: Schedule = new Schedule(undefined,undefined,undefined,undefined,undefined,undefined);
 
   @ViewChild('scheduleModal')
