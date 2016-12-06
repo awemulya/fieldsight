@@ -177,7 +177,7 @@
 
                 <div class="col-sm-4">
                   <select class="form-control" multiple (change)="setSelected($event.target)">
-                    <option *ngFor="let item of days" [value]="item.index">{{item.day}}</option>
+                    <option *ngFor="let item of days" [value]="item.id">{{item.day}}</option>
                   </select>
                 </div>
               </div>
@@ -188,7 +188,7 @@
 
     </modal-body>
     <modal-footer>
-      <button class="btn btn-default" type="button" (click)="newScheduleClose()">Save</button>
+      <button class="btn btn btn-success" type="button" (click)="newScheduleClose()">Save</button>
   </modal-footer>
 </modal>
 

@@ -9,7 +9,8 @@ import { GroupsService } from '../../services/groups/groups.service';
 import { XformService } from '../../services/xform/xform.service';
 import { UserService } from '../../services/user/user.service';
 import { StageService } from '../../services/stage/stage.service';
-import { FieldsightXF, Xform, Stage, Schedule } from '../../models/fieldsightxf';
+import { ScheduleService } from '../../services/schedule/schedule.service';
+import { FieldsightXF, Xform, Stage, Schedule, Day } from '../../models/fieldsightxf';
 import myGlobals = require('../../globals');
 
 @Component({
@@ -34,17 +35,10 @@ export class SiteFormsComponent implements OnInit {
   formTypes = [{'id': 1, type:"Staged"},{'id': 2, type:"Scheduled"},{'id': 3, type:"Normal"}]
   shared_levels = [{'id': 1, type:"Global"},{'id': 2, type:"Organization"},{'id': 3, type:"Private"}]
 
-  days = [
-  {'index':0 , day: 'Monday',selected: false},
-  {'index':1 , day: 'Tuesday',selected: false},
-  {'index':2 , day: 'Wednesday',selected: false},
-  {'index':3 , day: 'Thursday',selected: false},
-  {'index':4 , day: 'Friday',selected: false},
-  {'index':5 , day: 'Saturday',selected: false},
-  {'index':6 , day: 'Sunday',selected: false}
-  ]
-  selectedDays: any;
-  new_schedule: Schedule = new Schedule(undefined,undefined,undefined,undefined,undefined,undefined);
+  days: Day[];
+  
+  selectedDays: Day[];
+  new_schedule: Schedule = new Schedule(undefined,undefined,undefined,[],undefined,undefined);
 
   @ViewChild('scheduleModal')
   scheduleModal: ModalComponent;
@@ -58,6 +52,7 @@ export class SiteFormsComponent implements OnInit {
     private groupService: GroupsService,
     private xformService: XformService,
     private stageService: StageService,
+    private scheduleService: ScheduleService,
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location
@@ -80,7 +75,8 @@ export class SiteFormsComponent implements OnInit {
     }
 
     newScheduleOpen() {
-        this.new_schedule = new Schedule(undefined,undefined,undefined,undefined,undefined,undefined);
+        this.getDays();
+        this.new_schedule = new Schedule(undefined,undefined,undefined,[],undefined,undefined);
         this.scheduleModal.open();
         console.log("opened");
     }
@@ -158,8 +154,13 @@ export class SiteFormsComponent implements OnInit {
         .then(stages => this.stages = stages);
   }
   getSchedules(){
-    this.stageService.getSchedules()
+    this.scheduleService.getSchedules()
         .then(schedules => this.schedules = schedules);
+  }
+
+  getDays(){
+    this.scheduleService.getDays()
+        .then(days => this.days = days);
   }
   reloadForms(){
     this.groupService.getForms(this.siteId)
@@ -181,14 +182,32 @@ export class SiteFormsComponent implements OnInit {
     setSelected(selectElement:any) {
         for (var i = 0; i < selectElement.options.length; i++) {
             var optionElement = selectElement.options[i];
-            var optionModel = this.days[i];
 
-            if (optionElement.selected == true) { optionModel.selected = true; }
-            // else { optionModel.selected = false; }
+            if (optionElement.selected == true) {
+
+             this.days[i].selected = true;
         }
+      }
         this.getSelected();
-    }
+  }
     getSelected(){
-      this.selectedDays = this.days.filter((item) => { return item.selected === true; });
+      this.selectedDays = this.days.filter((item) => {
+        var index = this.new_schedule.selected_days.indexOf(item.id, 0);
+        if(item.selected === true){
+          if (index < 0) {
+               this.new_schedule.selected_days.push(item.id);
+            }
+
+          return true;
+        }else{
+           if (index > -1) {
+               this.new_schedule.selected_days.splice(index, 1);
+            }
+
+        }
+
+        });
+             
     }
+    
 }

@@ -49,8 +49,18 @@ export class Schedule{
     public id: number,
     public name: string,
     public days: string,
-    public selected_days: any,
+    public selected_days: Array<number>,
     public date_range_start: string,
     public date_range_end: string,
+        ){}
+}
+
+export class Day{
+
+    constructor(
+    public id: number,
+    public index: number,
+    public day: string,
+    public selected: boolean,
         ){}
 }
