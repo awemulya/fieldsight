@@ -48,6 +48,9 @@ export class SiteFormsComponent implements OnInit {
   @ViewChild('stageModal')
   stageModal: ModalComponent;
 
+
+
+
   
 
     constructor(
@@ -57,8 +60,13 @@ export class SiteFormsComponent implements OnInit {
     private scheduleService: ScheduleService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private location: Location
-  ) {}
+    private location: Location,
+     )
+   {
+     // this.new_schedule.valueChanges
+     //         .debounceTime(400)
+     //         .subscribe(value => console.log(value));
+   }
 
   ngOnInit(): void {
     this.route.params
@@ -69,24 +77,34 @@ export class SiteFormsComponent implements OnInit {
        });
      }
 
-
+  wait(ms:number){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
 
     newScheduleClose() {
       this.saveSchedule();
-        
+      // this.wait(2000);
+      
         this.scheduleModal.close();
+       
+   
+        
     }
     
     saveSchedule(){
     this.scheduleService.saveSchedule(this.new_schedule)
         .then(new_schedule => this.new_schedule = new_schedule);
-        if(this.new_schedule.id){
+             if(this.new_schedule.id){
         this.schedules.push(this.new_schedule);
         }else{
           console.log(this.new_schedule);
         }
 
-      }
+        }
 
 
     newScheduleOpen() {
@@ -97,18 +115,21 @@ export class SiteFormsComponent implements OnInit {
 
      newStageClose() {
        this.saveStage();
+       // this.wait(1000);
+      
         this.stageModal.close();
     }
 
     saveStage(){
         this.stageService.saveStage(this.new_stage)
         .then(new_stage => this.new_stage = new_stage);
-       if(this.new_stage.id){
+
+         if(this.new_stage.id){
         this.stages.push(this.new_stage);
         }else{
           console.log(this.new_stage);
         }
-            
+                
 
       }
 
@@ -123,16 +144,6 @@ export class SiteFormsComponent implements OnInit {
     this.saveAssignedForm();
     this.reloadForms();
     this.displayForm = false;
-    // this.groupService.getForms(this.id) reload site forms again
-    // if(this.model.is_staged == true && !this.model.stage){
-    //   this.model.stage.value.markAsDirty();
-    // }else if(this.model.is_scheduled == true && !this.model.schedule){
-    //  this.model.schedule.value.markAsDirty();
-    // }else{
-
-    //   console.log(this.model.xf);
-    // }
-
    }
   newForm() {
     this.displayForm = true;
