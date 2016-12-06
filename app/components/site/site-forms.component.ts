@@ -24,6 +24,7 @@ export class SiteFormsComponent implements OnInit {
   siteForms: FieldsightXF[];
   xForms: Xform[];
   stages: Stage[];
+  mainStages: Stage[];
   schedules: Schedule[];
   displayForm = false;  
   displayAddStage = false;
@@ -39,6 +40,7 @@ export class SiteFormsComponent implements OnInit {
   
   selectedDays: Day[];
   new_schedule: Schedule = new Schedule(undefined,undefined,undefined,[],undefined,undefined);
+  new_stage: Stage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined);
 
   @ViewChild('scheduleModal')
   scheduleModal: ModalComponent;
@@ -70,25 +72,51 @@ export class SiteFormsComponent implements OnInit {
 
 
     newScheduleClose() {
+      this.saveSchedule();
+        
         this.scheduleModal.close();
-        console.log("closed");
     }
+    
+    saveSchedule(){
+    this.scheduleService.saveSchedule(this.new_schedule)
+        .then(new_schedule => this.new_schedule = new_schedule);
+        if(this.new_schedule.id){
+        this.schedules.push(this.new_schedule);
+        }else{
+          console.log(this.new_schedule);
+        }
+
+      }
+
 
     newScheduleOpen() {
         this.getDays();
         this.new_schedule = new Schedule(undefined,undefined,undefined,[],undefined,undefined);
         this.scheduleModal.open();
-        console.log("opened");
     }
 
-       newStageModalClose() {
+     newStageClose() {
+       this.saveStage();
         this.stageModal.close();
-        console.log("closed");
     }
 
-    newStageModalOpen() {
+    saveStage(){
+        this.stageService.saveStage(this.new_stage)
+        .then(new_stage => this.new_stage = new_stage);
+       if(this.new_stage.id){
+        this.stages.push(this.new_stage);
+        }else{
+          console.log(this.new_stage);
+        }
+            
+
+      }
+
+
+    newStageOpen() {
+      this.getMainStages();
+        this.new_stage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined);
         this.stageModal.open();
-        console.log("opened");
     }
 
   onSubmit() { 
@@ -148,7 +176,11 @@ export class SiteFormsComponent implements OnInit {
      this.xformService.getForms()
         .then(xForms => this.xForms = xForms);
    }
-
+   
+   getMainStages(){
+    this.stageService.getMainStages()
+        .then(stages => this.mainStages = stages);
+  }
   getStages(){
     this.stageService.getStages()
         .then(stages => this.stages = stages);
@@ -209,5 +241,6 @@ export class SiteFormsComponent implements OnInit {
         });
              
     }
-    
+
+
 }
