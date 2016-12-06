@@ -97,13 +97,7 @@ export class SiteFormsComponent implements OnInit {
     
     saveSchedule(){
     this.scheduleService.saveSchedule(this.new_schedule)
-        .then(new_schedule => this.new_schedule = new_schedule);
-             if(this.new_schedule.id){
-        this.schedules.push(this.new_schedule);
-        }else{
-          console.log(this.new_schedule);
-        }
-
+        .then(new_schedule => this.schedules.push(new_schedule));
         }
 
 
@@ -122,14 +116,8 @@ export class SiteFormsComponent implements OnInit {
 
     saveStage(){
         this.stageService.saveStage(this.new_stage)
-        .then(new_stage => this.new_stage = new_stage);
-
-         if(this.new_stage.id){
-        this.stages.push(this.new_stage);
-        }else{
-          console.log(this.new_stage);
-        }
-                
+        .then(new_stage => this.stages.push(new_stage));
+              
 
       }
 
@@ -144,6 +132,7 @@ export class SiteFormsComponent implements OnInit {
     this.saveAssignedForm();
     this.reloadForms();
     this.displayForm = false;
+    return false;
    }
   newForm() {
     this.displayForm = true;
