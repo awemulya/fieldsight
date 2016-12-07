@@ -27,6 +27,13 @@ export class GroupsService {
                .catch(this.handleError);
   }
 
+  getReloadedForms(id: number): Promise<FieldsightXF[]> {
+    return this.http.get(this.apiSiteForms+"/"+id)
+               .toPromise()
+               .then(response => response.json() as FieldsightXF[])
+               .catch(this.handleError);
+  }
+
   private handleError(error: any) {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);

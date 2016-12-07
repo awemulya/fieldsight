@@ -195,7 +195,7 @@ export class SiteFormsComponent implements OnInit {
         .then(days => this.days = days);
   }
   reloadForms(){
-    this.groupService.getForms(this.siteId)
+    this.groupService.getReloadedForms(this.siteId)
         .then(siteForms => this.siteForms = siteForms);
 
   }
