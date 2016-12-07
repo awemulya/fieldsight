@@ -4,6 +4,7 @@
  username: {{username}}
 </div>
 <button class="btn btn-default" type="button" (click)="newForm()" *ngIf="!displayForm">New Form</button>
+<button class="btn btn-default" type="button" (click)="reloadForms()" *ngIf="!displayForm">Refresh Form</button>
 
 <div class="container" *ngIf="displayForm">
   <div>
