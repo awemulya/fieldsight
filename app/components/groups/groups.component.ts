@@ -5,7 +5,30 @@ import { GroupsService } from '../../services/groups/groups.service'
 
 @Component({
   selector: 'dinosaurs',
-  templateUrl: '/app/templates/groups/groups.component.html',
+  templateUrl: `
+  <h2> Form Groups </h2>
+<div *ngIf="selectedGroup">
+  <h2>
+    {{selectedGroup.name | uppercase}} 
+    {{selectedGroup.description}} 
+  </h2>
+  stages List of {{selectedGroup.name}}
+  <!-- put some component here e.g  -->
+</div>
+
+
+<ul class="heroes">
+  <li *ngFor="let group of groups" (click)="onSelect(group)"
+      [class.selected]="group === selectedGroup">
+    <span>{{group.name}}</span>
+ 
+      <button class="heros"
+      (click)="onSelect(group); $event.stopPropagation()">Detail</button>
+  </li> 
+</ul>
+
+
+  `,
   styleUrls: [ '/app/heroes.component.css' ] 
 })
 export class GroupsComponent implements OnInit {

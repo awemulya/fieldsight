@@ -9,8 +9,10 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'dinosaurs',
-  templateUrl: '/app/templates/stage/add-stage.component.html',
-  styleUrls: [ '/app/heroes.component.css' ] 
+  templateUrl: `
+  Add Stage Here
+  `,
+  styleUrls: [ '/static/ng/app/heroes.component.css' ] 
 })
 export class AddStageComponent implements OnInit {
 hero: Hero;
