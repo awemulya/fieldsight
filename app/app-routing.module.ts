@@ -8,14 +8,9 @@ import { AddStageComponent }      from './components/stage/add-stage.component';
 import { HeroDetailComponent }  from './hero-detail.component';
 import { SiteFormsComponent }  from './components/site/site-forms.component';
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'dashboard',  component: DashboardComponent },
-  { path: 'login',  component: UserComponent },
-  { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'site-forms/:id', component: SiteFormsComponent },
-  { path: 'sites',     component: HeroesComponent },
-  { path: 'forms',     component: GroupsComponent },
-  { path: 'stage/add/:id',     component: AddStageComponent }
+ { path: '', redirectTo: 'forms/site-forms/:id', pathMatch: 'full' },
+
+  { path: 'forms/site-forms/:id', component: SiteFormsComponent },
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
