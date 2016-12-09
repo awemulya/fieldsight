@@ -8,8 +8,6 @@ import { RouterModule, Routes } from '@angular/router';
 // import { HeroDetailComponent }  from './hero-detail.component';
 import { SiteFormsComponent }  from './components/site/site-forms.component';
 const routes: Routes = [
-  { 
-    // path: '', redirectTo: 'login', pathMatch: 'full' },
   // { path: 'dashboard',  component: DashboardComponent },
   // { path: 'login',  component: UserComponent },
   // { path: 'detail/:id', component: HeroDetailComponent },
@@ -17,6 +15,8 @@ const routes: Routes = [
   // { path: 'sites',     component: HeroesComponent },
   // { path: 'forms',     component: GroupsComponent },
   // { path: 'stage/add/:id',     component: AddStageComponent }
+ { path: '', redirectTo: 'forms/site-forms/:id', pathMatch: 'full' },
+
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
