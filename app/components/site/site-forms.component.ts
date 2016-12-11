@@ -6,10 +6,10 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
 import { GroupsService } from '../../services/groups/groups.service';
-// import { XformService } from '../../services/xform/xform.service';
+import { XformService } from '../../services/xform/xform.service';
 // import { UserService } from '../../services/user/user.service';
-// import { StageService } from '../../services/stage/stage.service';
-// import { ScheduleService } from '../../services/schedule/schedule.service';
+import { StageService } from '../../services/stage/stage.service';
+import { ScheduleService } from '../../services/schedule/schedule.service';
 import { FieldsightXF, Xform, Stage, Schedule, Day } from '../../models/fieldsightxf';
 import myGlobals = require('../../globals');
 @Component({
@@ -54,9 +54,9 @@ export class SiteFormsComponent implements OnInit {
 
     constructor(
     private groupService: GroupsService,
-    // private xformService: XformService,
-    // private stageService: StageService,
-    // private scheduleService: ScheduleService,
+    private xformService: XformService,
+    private stageService: StageService,
+    private scheduleService: ScheduleService,
     // private userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
@@ -95,8 +95,8 @@ export class SiteFormsComponent implements OnInit {
     }
     
     saveSchedule(){
-    // this.scheduleService.saveSchedule(this.new_schedule)
-    //     .then(new_schedule => this.schedules.push(new_schedule));
+    this.scheduleService.saveSchedule(this.new_schedule)
+        .then(new_schedule => this.schedules.push(new_schedule));
         }
 
 
@@ -114,8 +114,8 @@ export class SiteFormsComponent implements OnInit {
     }
 
     saveStage(){
-        // this.stageService.saveStage(this.new_stage)
-        // .then(new_stage => this.stages.push(new_stage));
+        this.stageService.saveStage(this.new_stage)
+        .then(new_stage => this.stages.push(new_stage));
               
 
       }
@@ -131,6 +131,7 @@ export class SiteFormsComponent implements OnInit {
     this.saveAssignedForm();
     this.reloadForms();
     this.displayForm = false;
+    this.setStageSchedule(3);
     return false;
    }
   newForm() {
@@ -154,7 +155,7 @@ export class SiteFormsComponent implements OnInit {
       this.model.is_staged = false;
       this.model.is_scheduled = true;
       this.model.stage = undefined;
-      // this.getSchedules();
+      this.getSchedules();
     }else if(formtype == 3){
       this.model.is_staged = false;
       this.model.is_scheduled = false;
@@ -172,26 +173,26 @@ export class SiteFormsComponent implements OnInit {
 }
    getXforms(){
 
-     // this.xformService.getForms()
-     //    .then(xForms => this.xForms = xForms);
+     this.xformService.getForms()
+        .then(xForms => this.xForms = xForms);
    }
    
    getMainStages(){
-    // this.stageService.getMainStages()
-        // .then(stages => this.mainStages = stages);
+    this.stageService.getMainStages()
+        .then(stages => this.mainStages = stages);
   }
   getStages(){
-    // this.stageService.getStages()
-    //     .then(stages => this.stages = stages);
+    this.stageService.getStages()
+        .then(stages => this.stages = stages);
   }
-  // getSchedules(){
-  //   this.scheduleService.getSchedules()
-  //       .then(schedules => this.schedules = schedules);
-  // }
+  getSchedules(){
+    this.scheduleService.getSchedules()
+        .then(schedules => this.schedules = schedules);
+  }
 
   getDays(){
-    // this.scheduleService.getDays()
-    //     .then(days => this.days = days);
+    this.scheduleService.getDays()
+        .then(days => this.days = days);
   }
   reloadForms(){
     this.groupService.getReloadedForms(this.siteId)
@@ -199,7 +200,7 @@ export class SiteFormsComponent implements OnInit {
 
   }
   saveAssignedForm(){
-    // this.xformService.saveAssignedForm(this.model);
+    this.xformService.saveAssignedForm(this.model);
   }
 
   getToken() {
