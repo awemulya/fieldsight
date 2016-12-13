@@ -1,11 +1,41 @@
-<div>
- version: {{version}}
-</div><div>
- username: {{username}}
+<style>
+  .clearfixxx{
+    clear: both;
+  }
+  .btn-site-form {
+    background: #296FD5;
+    color: #fff;
+    margin-right: 10px;
+    opacity: 0.7;
+  }
+  .btn-site-form:hover {
+    background: #237DFF;
+    opacity: 1;
+ }
+ .site-forms-list-single {
+    padding: 10px 0px;
+    border-bottom: 1px solid #D8D9DE;
+}
+.site-buttons {
+    padding: 20px 0px 10px;
+}
+.site-buttons .btn-default{
+    background-color: #237DFF;
+    border-color: #b0b5b9;
+    color: #fff;
+}
+.site-buttons .btn-default:hover{
+    background-color: #296FD5;
+    
+}
+</style>
+<div class="site-buttons">
+  <div class="col-md-12">
+    <button class="btn btn-default" type="button" (click)="newForm()" *ngIf="!displayForm">New Form</button>
+    <button class="btn btn-default" type="button" (click)="reloadForms()" *ngIf="!displayForm">Refresh Form</button>
+  </div>
+  <div class="clearfixxx"></div>
 </div>
-<button class="btn btn-default" type="button" (click)="newForm()" *ngIf="!displayForm">New Form</button>
-<button class="btn btn-default" type="button" (click)="reloadForms()" *ngIf="!displayForm">Refresh Form</button>
-
 <div class="container" *ngIf="displayForm">
   <div>
     <form class="form-horizontal" #siteForm="ngForm">
@@ -22,7 +52,7 @@
             </select>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-default" type="button" (click)="getXforms()">Refresh</button>
+            <button class="btn btn-site-form" type="button" (click)="getXforms()">Refresh</button>
           </div>
         </div>
 
@@ -61,7 +91,7 @@
             </select>
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-default" type="button" (click)="newScheduleOpen()">Add Schedule</button>
+            <button class="btn btn-site-form" type="button" (click)="newScheduleOpen()">Add Schedule</button>
           </div>
         </div>
 
@@ -93,17 +123,28 @@
 
 
 <div class="heroes" *ngIf="!displayForm">
-  <div>
-    Forms Assigned To This Site
+  <div class="col-md-12">
+    <h3>
+      Forms Assigned To This Site
+    </h3>
   </div>
+  <div class="clearfixxx"></div>
 
 
   <div *ngFor="let form of siteForms">
-    <span>Name: <b>{{form.name}}</b></span> <span>Description:
-    {{form.descriptionText}}</span> <span>Staged: {{form.is_staged}}</span>
-    <span>Scheduled:{{form.is_scheduled}}</span> <a href=
-    "http://localhost:8001/forms/reports/{{form.id}}">View Submission Data</a>
-    <a href="http://localhost:8000/">Preview Form</a>
+    <div class="site-forms-list-single">
+      <div class="col-md-6">
+        <p><span>Name:</span> <b>{{form.name}}</b></p> 
+        <p><span>Description:</span>{{form.descriptionText}}</p> 
+        <p><span>Staged:</span> {{form.is_staged}}</p>
+        <p><span>Scheduled:</span>{{form.is_scheduled}}</p>
+      </div>
+      <div class="col-md-6"> 
+        <a class="btn btn-site-form" href="http://localhost:8001/forms/reports/{{form.id}}">View Submission Data</a>
+        <a class="btn btn-site-form" href="http://localhost:8000/">Preview Form</a>
+      </div>
+      <div class="clearfixxx"></div>
+    </div>
   </div>
 </div>
   <button (click)="goBack()">Back</button>
@@ -120,7 +161,7 @@
         <h4 class="modal-title">Add New Schedule</h4>
     </modal-header>
     <modal-body>
-      <div class="container" *ngIf="displayForm">
+      <div class="" *ngIf="displayForm">
           <form class="form-horizontal" #scheduleForm="ngForm">
             <fieldset>
 
