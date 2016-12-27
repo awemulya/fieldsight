@@ -41,6 +41,7 @@ export class Stage{
     public name: string,
     public description: string,
     public main_stage: string,
+    public site: number,
         ){}
 }
 export class Schedule{

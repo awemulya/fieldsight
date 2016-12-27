@@ -19,6 +19,7 @@ import { ScheduleService }      from './services/schedule/schedule.service';
 // import { HeroSearchComponent }  from './hero-search.component';
 // import { AddStageComponent }  from './components/stage/add-stage.component';
 import { SiteFormsComponent }  from './components/site/site-forms.component';
+import { SiteStagesComponent }  from './components/stage/site-stages.component';
 // import { UserComponent }  from './components/user/user.component';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
@@ -41,6 +42,7 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
     // GroupsComponent,
     // AddStageComponent,
     SiteFormsComponent,
+    SiteStagesComponent,
     // UserComponent
   ],
   providers: [GroupsService, XformService, StageService, ScheduleService ],

@@ -7,11 +7,13 @@ import { RouterModule, Routes } from '@angular/router';
 // import { AddStageComponent }      from './components/stage/add-stage.component';
 // import { HeroDetailComponent }  from './hero-detail.component';
 import { SiteFormsComponent }  from './components/site/site-forms.component';
+import { SiteStagesComponent }  from './components/stage/site-stages.component';
 const routes: Routes = [
   // { path: 'dashboard',  component: DashboardComponent },
   // { path: 'login',  component: UserComponent },
   // { path: 'detail/:id', component: HeroDetailComponent },
   { path: 'forms/site-forms/:id', component: SiteFormsComponent },
+  { path: 'forms/site-stages/:id', component: SiteStagesComponent },
   // { path: 'sites',     component: HeroesComponent },
   // { path: 'forms',     component: GroupsComponent },
   // { path: 'stage/add/:id',     component: AddStageComponent }
