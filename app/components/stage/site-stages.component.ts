@@ -121,10 +121,10 @@ mainStageOnSelect(stage: Stage): void {
      // this.saveStage();
      // this.wait(1000);
     this.xformService.saveAssignedForm(this.model)
-    .then(fsxf => this.formSaved(fsxf);
+    .then(fsxf => this.formSaved(fsxf));
       this.formModal.close();
 }
-formSaved(fsxf: FieldsightXF){
+formSaved(fsxf: any){
   
     for (var i = 0; i < this.subStages.length; i++) {
             var stage = this.subStages[i];
@@ -146,7 +146,7 @@ setFormAssigned(xf: Xform){
 
 showMainStages(){
   this.showCreateMainStage = true;
-  this.selectedMainStage = false;
+  this.selectedMainStage = null;
   
 }
   goBack(): void {
