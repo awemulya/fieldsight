@@ -9,7 +9,8 @@ export class StageService {
   private koboURL = myGlobals.KOBOCAT_URL
   private apiURL = this.koboURL + '/forms/api/stage/';  // URL to groups api
   private apiURLMainStages = this.koboURL + '/forms/api/main-stages/';  // URL to groups api
-  private siteMainStagesUrl = this.koboURL + '/forms/api/site-main-stages';  // URL to groups api
+  private siteMainStagesUrl = this.koboURL + '/forms/api/site-main-stages';  // URL to main stages api
+  private subStagesUrl = this.koboURL + '/forms/api/sub-stages';  // URL to sub stages api
   private headers = new Headers({ 'Content-Type': 'application/json' });
   // this.headers.append("Authorization", 'Bearer ' + localStorage.getItem('id_token'))
   private options = new RequestOptions({ headers: this.headers });// user token 
@@ -32,6 +33,13 @@ export class StageService {
 
    getSiteMainStages(site_id: number): Promise<Stage[]> {
     return this.http.get(this.siteMainStagesUrl+"/"+site_id)
+               .toPromise()
+               .then(response => response.json() as Stage[])
+               .catch(this.handleError);
+  }
+
+  getSubStages(stage_id: number): Promise<Stage[]> {
+    return this.http.get(this.subStagesUrl+"/"+stage_id)
                .toPromise()
                .then(response => response.json() as Stage[])
                .catch(this.handleError);

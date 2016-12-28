@@ -39,7 +39,7 @@ export class SiteFormsComponent implements OnInit {
   
   selectedDays: Day[];
   new_schedule: Schedule = new Schedule(undefined,undefined,undefined,[],undefined,undefined);
-  new_stage: Stage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined);
+  new_stage: Stage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined,undefined);
 
   @ViewChild('scheduleModal')
   scheduleModal: ModalComponent;
@@ -123,7 +123,7 @@ export class SiteFormsComponent implements OnInit {
 
     newStageOpen() {
       this.getMainStages();
-        this.new_stage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined);
+        this.new_stage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined,undefined);
         this.stageModal.open();
     }
 

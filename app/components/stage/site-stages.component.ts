@@ -20,9 +20,18 @@ import myGlobals = require('../../globals');
 
 export class SiteStagesComponent implements OnInit {
   siteId: number;
+  showCreateMainStage: boolean = true;
   siteStages: Stage[];
+  subStages: Stage[];
+  model = new FieldsightXF(undefined, undefined, undefined, false, false, undefined, undefined, 2);
+  currentSubStage: Stage;
   xForms: Xform[];
   newStage: Stage;
+  newSubStage: Stage;
+  selectedMainStage: Stage;
+
+  @ViewChild('formModal')
+  formModal: ModalComponent;
 
   constructor(
     private xformService: XformService,
@@ -41,7 +50,7 @@ export class SiteStagesComponent implements OnInit {
      this.route.params.subscribe(params => {
        this.siteId = +params['id'];
        });
-     this.newStage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined,this.siteId);
+     this.newStage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined,this.siteId,undefined);
      }
 
   wait(ms:number){
@@ -67,8 +76,13 @@ order(){
     
   onSubmit() { 
     this.saveStage();
-    this.newStage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined,this.siteId);
-    // saveStage
+    this.newStage = new Stage(undefined,undefined,undefined,undefined,undefined,undefined,this.siteId,undefined);
+    return false;
+   }
+
+  onSaveSubStage() { 
+    this.saveSubStage();
+    this.newSubStage = new Stage(undefined,undefined,this.selectedMainStage.id,undefined,undefined,undefined,this.siteId,undefined);
     return false;
    }
 
@@ -78,8 +92,63 @@ saveStage(){
               
 
       }
+    saveSubStage(){
+        this.stageService.saveStage(this.newSubStage)
+        .then(newStage => this.subStages.push(newStage));
+              
 
+      }
 
+mainStageOnSelect(stage: Stage): void {
+    this.showCreateMainStage = false;
+    this.selectedMainStage = stage;
+    this.stageService.getSubStages(stage.id)
+      .then(subStages => this.subStages = subStages);
+    this.newSubStage = new Stage(undefined,undefined,this.selectedMainStage.id,undefined,undefined,undefined,this.siteId, undefined);
+  }
+
+  openAssignForm(stage: Stage){
+    this.model.xf = undefined;
+    this.model.stage = stage.id;
+    this.currentSubStage = stage;
+    this.xformService.getForms()
+        .then(xForms => this.xForms = xForms);
+    this.formModal.open();
+
+  }
+
+ assignFormClose() {
+     // this.saveStage();
+     // this.wait(1000);
+    this.xformService.saveAssignedForm(this.model)
+    .then(fsxf => this.formSaved(fsxf);
+      this.formModal.close();
+}
+formSaved(fsxf: FieldsightXF){
+  
+    for (var i = 0; i < this.subStages.length; i++) {
+            var stage = this.subStages[i];
+
+            if (stage.id == this.currentSubStage.id) {
+
+             this.subStages[i].form = this.currentSubStage.form;
+        }
+      }
+ 
+}
+
+setFormAssigned(xf: Xform){
+  this.currentSubStage.form = xf.title;
+  this.model.site = this.siteId;
+  this.model.xf = xf.id;
+  this.model.is_staged = true;
+}
+
+showMainStages(){
+  this.showCreateMainStage = true;
+  this.selectedMainStage = false;
+  
+}
   goBack(): void {
     this.location.back();
   }
