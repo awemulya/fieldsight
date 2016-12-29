@@ -45,8 +45,9 @@
 <!-- Form Name -->
 <legend>Set Up Sub Stages</legend>
 <div class="form-group">
-  <label class="col-sm-6 control-label" >Stage - {{selectedMainStage.order}} {{selectedMainStage.name}}</label>  
-  <label class="col-sm-6 control-label"> </label>  
+  <div class="col-sm-12 text-center" ><h3> Stage - {{selectedMainStage.order}} {{selectedMainStage.name}} </h3></div> 
+  <div class="col-sm-12 text-center"><h4>{{selectedMainStage.description}} </h4></div> 
+   
 </div>
 <div class="form-group">
   <label class="col-md-4 control-label" for="sub">New Sub Stage</label>  
@@ -115,7 +116,7 @@
     <modal-body>
          <div *ngFor="let xf of xForms" >
             <div class="site-forms-list-single"  (click)="setFormAssigned(xf)"
-              [class.selected]="true">
+              [class.selected]="xf === selectedXform">
               <div class="col-md-12">
                 <p><span>Name:</span> <b>{{xf.title}}</b></p> 
               </div>

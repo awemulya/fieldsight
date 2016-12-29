@@ -30,6 +30,7 @@ export class SiteStagesComponent implements OnInit {
   newStage: Stage;
   newSubStage: Stage;
   selectedMainStage: Stage;
+  selectedXform: Xform;
 
   @ViewChild('formModal')
   formModal: ModalComponent;
@@ -139,6 +140,7 @@ formSaved(fsxf: any){
 }
 
 setFormAssigned(xf: Xform){
+  this.selectedXform = xf;
   this.currentSubStage.form = xf.title;
   this.model.site = this.siteId;
   this.model.xf = xf.id;
