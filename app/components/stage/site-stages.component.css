@@ -7,6 +7,13 @@
     transition:all 0.2s ease-in-out;
     -moz-transition:all 0.2s ease-in-out;
     -webkit-transition:all 0.2s ease-in-out;
+    min-height: 200px;
+    width: 100%;
+    display: table;
+}
+.stages-middle {
+    display: table-cell;
+    vertical-align: middle;
 }
 .substages-main-list{
 	background: #237dff;
@@ -93,4 +100,35 @@
 .site-forms-list-single:hover {
     background: #237dff;
     color: #fff;
+}
+.stages-main-list {
+    position: relative;
+}
+.substages-main-list {
+    position: relative;
+}
+.stage-order {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background: red;
+}
+.stage-order p{
+	margin-bottom: 0px;
+}
+.substage-order {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background: red;
+}
+.substage-order p{
+	margin-bottom: 0px;
+}
+
+span.plus-sign {
+    display: block;
+    font-size: 30px;
 }

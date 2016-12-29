@@ -77,12 +77,12 @@
 
   <div class="sub-stages" *ngIf="!showCreateMainStage">
     <div *ngFor="let stage of subStages">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="substages-main-list">
-          <h3><span>Order:</span> <b>{{stage.order}}</b></h3> 
-          <h4><span>Name:</span> <b>{{stage.name}}</b></h4> 
-          <p><span>Description:</span>{{stage.description}}</p> 
+          <h4><b>{{stage.name}}</b></h4> 
+          <p>{{stage.description}}</p> 
           <p *ngIf="stage.form"><span>Form Assigned:</span>{{stage.form}}</p> 
+          <div class="substage-order"><p>{{stage.order}}</p></div>
           <p *ngIf="!stage.form">
             <button class="btn btn-success" (click)="openAssignForm(stage)">Assign Form</button>
             <button class="btn btn-success" (click)="openAssignForm(stage)">Creat New Form</button>
@@ -95,16 +95,25 @@
 
 <div class="main-stages" *ngIf="showCreateMainStage">
   <div *ngFor="let stage of siteStages" >
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="stages-main-list" (click)="mainStageOnSelect(stage)"
       [class.selected]="stage === selectedMainStage">
-        <h3><span>Stage:</span> <b>{{stage.order}}</b></h3> 
-        <h4><span>Name:</span> <b>{{stage.name}}</b></h4> 
-        <p><span>Description:</span>{{stage.description}}</p> 
+        <div class="stages-middle">
+          <h4><b>{{stage.name}}</b></h4> 
+          <p>{{stage.description}}</p> 
+           <div class="substage-order"><p>{{stage.order}}</p></div>
+        </div>
       </div>
       
     </div>
   </div>
+    <div class="col-md-3">
+      <div class="stages-main-list">
+        <div class="stages-middle">
+          <span class="plus-sign"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+        </div>  
+      </div>
+    </div>
 </div>
 
 
