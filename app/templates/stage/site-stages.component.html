@@ -114,9 +114,9 @@
     </modal-header>
     <modal-body>
          <div *ngFor="let xf of xForms" >
-            <div class="site-forms-list-single">
-              <div class="col-md-12" (click)="setFormAssigned(xf)"
+            <div class="site-forms-list-single"  (click)="setFormAssigned(xf)"
               [class.selected]="true">
+              <div class="col-md-12">
                 <p><span>Name:</span> <b>{{xf.title}}</b></p> 
               </div>
               <div class="clearfixxx"></div>

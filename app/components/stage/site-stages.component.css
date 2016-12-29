@@ -78,7 +78,10 @@
     color: #FFFFFF;
 }
 
-
+.selected{
+    background: #296fd5 !important;
+    color: #fff;
+}
 .site-forms-list-single {
     padding: 15px 10px;
     background: #ECECEC;
