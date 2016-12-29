@@ -15,7 +15,8 @@ import myGlobals = require('../../globals');
 @Component({
   moduleId: module.id,
   selector: 'site-stages',
-  templateUrl: '../../templates/stage/site-stages.component.html'
+  templateUrl: '../../templates/stage/site-stages.component.html',
+  styleUrls: [ 'site-stages.component.css' ]
 })
 
 export class SiteStagesComponent implements OnInit {

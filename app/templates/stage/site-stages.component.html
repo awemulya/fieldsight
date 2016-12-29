@@ -1,35 +1,44 @@
-<button (click)="goBack()">Back</button>
-<button (click)="showMainStages()" *ngIf="!showCreateMainStage">Main Stages</button>
-<form class="form-horizontal" #mainStageForm="ngForm" *ngIf="showCreateMainStage">
-<fieldset>
+<div class="col-md-12">
+  <div class="all-above-things">
+    <button class="btn btn-primary" (click)="goBack()">Back</button>
+    <button class="btn btn-primary1" (click)="showMainStages()" *ngIf="!showCreateMainStage">Main Stages</button>
+    <form class="form-horizontal" #mainStageForm="ngForm" *ngIf="showCreateMainStage">
+    <fieldset>
 
-<!-- Form Name -->
-<legend>Set Up Stages</legend>
+    <!-- Form Name -->
+    <legend>Set Up Stages</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="textinput">Stage {{order()}}</label>  
-  <div class="col-md-6">
-  <input id="textinput" name="textinput" type="text" placeholder="New Stage Name" class="form-control input-md" required [(ngModel)]="newStage.name" >
-    
-  </div>
-    <label class="col-md-4 control-label" for="textinputDesc">Stage Description</label>  
-  <div class="col-md-6">
-  <input id="textinputDesc" name="textinputDesc" type="text" placeholder="Stage Description" class="form-control input-md"  [(ngModel)]="newStage.description" >
-    
-  </div>
-  <div class="col-md-2">
-	  <button class="btn btn-success" id="button1id" name="button1id" 
-	         [disabled]="!mainStageForm.form.valid" (click)="onSubmit()">Save</button> 
+    <!-- Text input-->
+    <div class="form-group">
+      <div class="col-md-12">
+        <label class="col-md-4 control-label" for="textinput">Stage {{order()}}</label>  
+        <div class="col-md-6">
+        <input id="textinput" name="textinput" type="text" placeholder="New Stage Name" class="form-control input-md" required [(ngModel)]="newStage.name" >
+          
+        </div>
+      </div>
+      <div class="col-md-12">
+        <label class="col-md-4 control-label" for="textinputDesc">Stage Description</label>  
+        <div class="col-md-6">
+        <input id="textinputDesc" name="textinputDesc" type="text" placeholder="Stage Description" class="form-control input-md"  [(ngModel)]="newStage.description" >
+          
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-success" id="button1id" name="button1id" 
+                 [disabled]="!mainStageForm.form.valid" (click)="onSubmit()">Save</button> 
+        </div>
+      </div>  
+    </div>
+
+
+
+
+    </fieldset>
+    </form>
   </div>
 </div>
-
-
-
-
-</fieldset>
-</form>
-
+<div class="clearfixxx"></div>
+<div class="col-md-12">
 <form class="form-horizontal" #mainStageDetailForm="ngForm" *ngIf="selectedMainStage">
 <fieldset>
 
@@ -61,31 +70,38 @@
 
 </fieldset>
 </form>
-<div class="sub-stages" *ngIf="!showCreateMainStage">
+</div>
+<div class="clearfixxx"></div>
+
+
+  <div class="sub-stages" *ngIf="!showCreateMainStage">
     <div *ngFor="let stage of subStages">
-    <div class="site-forms-list-single">
-      <div class="col-md-12">
-        <p><span>Order:</span> <b>{{stage.order}}</b></p> 
-        <p><span>Name:</span> <b>{{stage.name}}</b></p> 
-        <p><span>Description:</span>{{stage.description}}</p> 
-        <p *ngIf="stage.form"><span>Form Assigned:</span>{{stage.form}}</p> 
-        <p *ngIf="!stage.form"><button class="btn btn-success" (click)="openAssignForm(stage)">Assign Form</button></p> 
+      <div class="col-md-4">
+        <div class="substages-main-list">
+          <h3><span>Order:</span> <b>{{stage.order}}</b></h3> 
+          <h4><span>Name:</span> <b>{{stage.name}}</b></h4> 
+          <p><span>Description:</span>{{stage.description}}</p> 
+          <p *ngIf="stage.form"><span>Form Assigned:</span>{{stage.form}}</p> 
+          <p *ngIf="!stage.form">
+            <button class="btn btn-success" (click)="openAssignForm(stage)">Assign Form</button>
+            <button class="btn btn-success" (click)="openAssignForm(stage)">Creat New Form</button>
+          </p> 
+        </div>
+        <div class="clearfixxx"></div>
       </div>
-      <div class="clearfixxx"></div>
     </div>
   </div>
-</div>
 
 <div class="main-stages" *ngIf="showCreateMainStage">
   <div *ngFor="let stage of siteStages" >
-    <div class="site-forms-list-single">
-      <div class="col-md-12" (click)="mainStageOnSelect(stage)"
+    <div class="col-md-4">
+      <div class="stages-main-list" (click)="mainStageOnSelect(stage)"
       [class.selected]="stage === selectedMainStage">
-        <p><span>Stage:</span> <b>{{stage.order}}</b></p> 
-        <p><span>Name:</span> <b>{{stage.name}}</b></p> 
+        <h3><span>Stage:</span> <b>{{stage.order}}</b></h3> 
+        <h4><span>Name:</span> <b>{{stage.name}}</b></h4> 
         <p><span>Description:</span>{{stage.description}}</p> 
       </div>
-      <div class="clearfixxx"></div>
+      
     </div>
   </div>
 </div>
@@ -98,14 +114,14 @@
     </modal-header>
     <modal-body>
          <div *ngFor="let xf of xForms" >
-    <div class="site-forms-list-single">
-      <div class="col-md-12" (click)="setFormAssigned(xf)"
-      [class.selected]="true">
-        <p><span>Name:</span> <b>{{xf.title}}</b></p> 
-      </div>
-      <div class="clearfixxx"></div>
-    </div>
-  </div>
+            <div class="site-forms-list-single">
+              <div class="col-md-12" (click)="setFormAssigned(xf)"
+              [class.selected]="true">
+                <p><span>Name:</span> <b>{{xf.title}}</b></p> 
+              </div>
+              <div class="clearfixxx"></div>
+            </div>
+          </div>
     </modal-body>
     <modal-footer>
     <button class="btn btn btn-success" type="button" (click)="assignFormClose()">Save</button></modal-footer>
